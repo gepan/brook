@@ -1,0 +1,38 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js",
+		"libs/modules/res/res.js",
+		"libs/modules/eui/eui.js",
+		"libs/modules/tween/tween.js",
+		"libs/modules/socket/socket.js",
+		"libs/modules/dragonBones/dragonBones.js",
+		"libs/modules/egret3d/egret3d.js",
+		"promise/bin/promise.js",
+		"libs/modules/uniLib/uniLib.js"
+	],
+	"game": [
+		"bin-debug/common/mahjong_room.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/Main.js",
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/common/common.js",
+		"bin-debug/common/lobby_exchange.js",
+		"bin-debug/common/lobby_history.js",
+		"bin-debug/common/lobby_room.js",
+		"bin-debug/common/lobby.js",
+		"bin-debug/common/mahjong_common.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/common/poker_room.js",
+		"bin-debug/GX/Event.js",
+		"bin-debug/GX/Socket.js",
+		"bin-debug/GX/Extensions/ArrayExtensions.js",
+		"bin-debug/GX/Extensions/GXExtensions.js",
+		"bin-debug/GX/Extensions/MathExtensions.js",
+		"bin-debug/GX/Extensions/NumberExtensions.js",
+		"bin-debug/GX/UI/EButton.js",
+		"bin-debug/GX/UI/ETextField.js",
+		"bin-debug/GX/UI/GameLayerManager.js"
+	]
+}
