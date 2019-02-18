@@ -56,7 +56,7 @@ var Data = (function () {
      */
     Data.ObstacleUDGap = 300;
     /**
-     * 烟台上下间隔
+     * 烟台左右间隔
      */
     Data.ObstacleLRGap = 300;
     /**

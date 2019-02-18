@@ -4,10 +4,10 @@ class Map extends egret.DisplayObjectContainer {
     private obstacleList: Array<Obstacle> = [];
     private obstacleTimer: number;
     private obstacleIndex: number = 0;
-
     private brid: Bird;
-
     private ui: UI;
+
+    private score:number;
     constructor() {
         super();
         this.init();
@@ -36,22 +36,10 @@ class Map extends egret.DisplayObjectContainer {
         if (Center.gameState == GameState.Ready) {
             this.startup();
             this.ui.setTipVisible(false);
-            Center.gameState = GameState.Doing;
         }
         else if (Center.gameState == GameState.Doing) {
             let brid = this.brid;
             brid.y -= Data.BirdDownSpeed*10;
-            let isGameOver:boolean =false;
-            for(let item of this.obstacleList){
-                if(item.isCollision(brid)){
-                    isGameOver =true;
-                }
-            }
-            if(isGameOver){
-                Center.gameState = GameState.End;
-                this.end();
-                console.log("gameover");
-            }
         }
     }
 
@@ -64,12 +52,36 @@ class Map extends egret.DisplayObjectContainer {
         }
         this.bg1Image.x -= Data.SkyMoveSpeed;
         this.bg2Image.x -= Data.SkyMoveSpeed;
+        this.updateObstacle();
         for (let item of this.obstacleList) {
             item.x -= Data.ObstacleMoveSpeed;
         }
-        this.brid.y += Data.BirdDownSpeed;
+        let brid = this.brid;
+        brid.y += Data.BirdDownSpeed;
+        let isGameOver: boolean = false;
+        for (let item of this.obstacleList) {
+            if (item.isCollision(brid)) {
+                isGameOver = true;
+            }
+        }
+        if (brid.y + brid.height > Data.SceneHeight || brid.y < 0){
+            isGameOver = true;
+        }
+        for (let item of this.obstacleList) {
+            if (item.x > brid.x) {
+                this.score = item.index - 1
+                break;
+            }
+        }
+        this.ui.setScoreLabel(this.score);
+        if (isGameOver) {
+            Center.gameState = GameState.End;
+            this.end();
+            console.log("gameover");
+        }
     }
     private startup() {
+        Center.gameState = GameState.Doing;
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         this.bg1Image.x = 0;
@@ -77,12 +89,34 @@ class Map extends egret.DisplayObjectContainer {
         this.clearObstacle();
         egret.clearInterval(this.obstacleTimer);
         this.obstacleIndex = 0;
-        this.obstacleTimer = egret.setInterval(() => {
+        this.updateObstacle();
+    }
+    private updateObstacle() {
+        let deleteObs = this.obstacleList.filter((v: Obstacle) => !v.isEffective());
+        for (let item of deleteObs) {
+            if (item && item.parent) {
+                item.parent.removeChild(item);
+            }
+            this.obstacleList.removeFirst(v => v == item);
+        }
+        console.error("deleteObs.length:" + deleteObs.length);
+        console.error("aaaaaaaaaaa:" + this.obstacleList.length);
+        let canLength = Math.ceil(Data.SceneWidth / Data.ObstacleLRGap);
+        let disparity = canLength - this.obstacleList.length;
+        for (let i: number = 0; i < disparity; i++) {
             this.obstacleIndex++;
             let obstacle = new Obstacle(this.obstacleIndex)
-            this.obstacleList.push(obstacle);
             this.addChild(obstacle);
-        }, this, 500);
+            if (this.obstacleIndex == 1) {
+                obstacle.x = Data.SceneWidth;
+            }
+            else {
+                let lastObs = this.obstacleList.last();
+                obstacle.x = (lastObs ? lastObs.x : 0) + Data.ObstacleLRGap;
+            }
+            this.obstacleList.push(obstacle);
+        }
+        console.error("this.obstacleList.length:" + this.obstacleList.length);
     }
     private end(){
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
@@ -96,5 +130,4 @@ class Map extends egret.DisplayObjectContainer {
         }
         this.obstacleList = [];
     }
-
 }

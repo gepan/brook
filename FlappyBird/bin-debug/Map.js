@@ -40,23 +40,10 @@ var Map = (function (_super) {
         if (Center.gameState == GameState.Ready) {
             this.startup();
             this.ui.setTipVisible(false);
-            Center.gameState = GameState.Doing;
         }
         else if (Center.gameState == GameState.Doing) {
             var brid = this.brid;
             brid.y -= Data.BirdDownSpeed * 10;
-            var isGameOver = false;
-            for (var _i = 0, _a = this.obstacleList; _i < _a.length; _i++) {
-                var item = _a[_i];
-                if (item.isCollision(brid)) {
-                    isGameOver = true;
-                }
-            }
-            if (isGameOver) {
-                Center.gameState = GameState.End;
-                this.end();
-                console.log("gameover");
-            }
         }
     };
     Map.prototype.onEnterFrame = function () {
@@ -68,14 +55,39 @@ var Map = (function (_super) {
         }
         this.bg1Image.x -= Data.SkyMoveSpeed;
         this.bg2Image.x -= Data.SkyMoveSpeed;
+        this.updateObstacle();
         for (var _i = 0, _a = this.obstacleList; _i < _a.length; _i++) {
             var item = _a[_i];
             item.x -= Data.ObstacleMoveSpeed;
         }
-        this.brid.y += Data.BirdDownSpeed;
+        var brid = this.brid;
+        brid.y += Data.BirdDownSpeed;
+        var isGameOver = false;
+        for (var _b = 0, _c = this.obstacleList; _b < _c.length; _b++) {
+            var item = _c[_b];
+            if (item.isCollision(brid)) {
+                isGameOver = true;
+            }
+        }
+        if (brid.y + brid.height > Data.SceneHeight || brid.y < 0) {
+            isGameOver = true;
+        }
+        for (var _d = 0, _e = this.obstacleList; _d < _e.length; _d++) {
+            var item = _e[_d];
+            if (item.x > brid.x) {
+                this.score = item.index - 1;
+                break;
+            }
+        }
+        this.ui.setScoreLabel(this.score);
+        if (isGameOver) {
+            Center.gameState = GameState.End;
+            this.end();
+            console.log("gameover");
+        }
     };
     Map.prototype.startup = function () {
-        var _this = this;
+        Center.gameState = GameState.Doing;
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         this.bg1Image.x = 0;
@@ -83,12 +95,39 @@ var Map = (function (_super) {
         this.clearObstacle();
         egret.clearInterval(this.obstacleTimer);
         this.obstacleIndex = 0;
-        this.obstacleTimer = egret.setInterval(function () {
-            _this.obstacleIndex++;
-            var obstacle = new Obstacle(_this.obstacleIndex);
-            _this.obstacleList.push(obstacle);
-            _this.addChild(obstacle);
-        }, this, 500);
+        this.updateObstacle();
+    };
+    Map.prototype.updateObstacle = function () {
+        var deleteObs = this.obstacleList.filter(function (v) { return !v.isEffective(); });
+        var _loop_1 = function (item) {
+            if (item && item.parent) {
+                item.parent.removeChild(item);
+            }
+            this_1.obstacleList.removeFirst(function (v) { return v == item; });
+        };
+        var this_1 = this;
+        for (var _i = 0, deleteObs_1 = deleteObs; _i < deleteObs_1.length; _i++) {
+            var item = deleteObs_1[_i];
+            _loop_1(item);
+        }
+        console.error("deleteObs.length:" + deleteObs.length);
+        console.error("aaaaaaaaaaa:" + this.obstacleList.length);
+        var canLength = Math.ceil(Data.SceneWidth / Data.ObstacleLRGap);
+        var disparity = canLength - this.obstacleList.length;
+        for (var i = 0; i < disparity; i++) {
+            this.obstacleIndex++;
+            var obstacle = new Obstacle(this.obstacleIndex);
+            this.addChild(obstacle);
+            if (this.obstacleIndex == 1) {
+                obstacle.x = Data.SceneWidth;
+            }
+            else {
+                var lastObs = this.obstacleList.last();
+                obstacle.x = (lastObs ? lastObs.x : 0) + Data.ObstacleLRGap;
+            }
+            this.obstacleList.push(obstacle);
+        }
+        console.error("this.obstacleList.length:" + this.obstacleList.length);
     };
     Map.prototype.end = function () {
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);

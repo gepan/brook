@@ -35,7 +35,7 @@ var Bird = (function (_super) {
         this.curBitmap.texture = this.bridBitmapList[state];
     };
     Bird.prototype.getRect = function () {
-        return new egret.Rectangle(this.x, this.y, this.x + this.width, this.x + this.height);
+        return new egret.Rectangle(this.x, this.y, this.width, this.height);
     };
     return Bird;
 }(egret.DisplayObjectContainer));

@@ -27,6 +27,6 @@ class Bird extends egret.DisplayObjectContainer {
     }
 
     public getRect(): egret.Rectangle {
-        return new egret.Rectangle(this.x, this.y, this.x + this.width, this.x + this.height);
+        return new egret.Rectangle(this.x, this.y, this.width, this.height);
     }
 }

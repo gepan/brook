@@ -41,7 +41,7 @@ class Data {
      */
     public static ObstacleUDGap: number = 300;
     /**
-     * 烟台上下间隔
+     * 烟台左右间隔
      */
     public static ObstacleLRGap: number = 300;
     /**
