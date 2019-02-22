@@ -2,7 +2,46 @@
 <e:Skin class="UISkin" states="up,down,disabled" minHeight="50" minWidth="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="640" height="1136">
 
 
-	<e:Label id="scoreLabel" text="0" top="0" left="0"/>
-	<e:Label id="tipLabel" text="点击屏幕开始游戏" horizontalCenter="0" verticalCenter="0"/>
+
+
 	<e:Image source="bird_res_json.tube02" x="262" y="286" scale9Grid="6,40,40,240" anchorOffsetX="0" width="80" visible="false"/>
+	<e:Group id="tipGroup" left="0" right="0" top="0" bottom="0">
+		<e:Image source="bird_res_json.ready_00" y="306" scaleX="2.5" scaleY="2.5" horizontalCenter="1.5"/>
+		<e:Image source="bird_res_json.tap" height="98" width="121" scaleX="1.7" scaleY="1.7" horizontalCenter="56" verticalCenter="0" x="285" y="495"/>
+	</e:Group>
+	<e:Group width="140" anchorOffsetX="0" anchorOffsetY="0" y="20" horizontalCenter="0" height="54">
+		<e:BitmapLabel id="scoreBitmapLabel" font="birdFont_fnt" text="0" scaleX="1.5" scaleY="1.5" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group id="gameoverGroup" width="640" height="1136" horizontalCenter="0" verticalCenter="0">
+		<e:Image source="bird_res_json.game_over" y="254" scaleX="2" scaleY="2" horizontalCenter="0"/>
+		<e:Image y="427" scaleX="2" scaleY="2" horizontalCenter="2" source="ui_004"/>
+		<e:Group width="120" height="54" x="402" y="490" anchorOffsetY="0" anchorOffsetX="0">
+			<e:BitmapLabel id="thisScoreBitmapLabel" font="birdFont_fnt" text="0" scaleX="1.5" scaleY="1.5" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Group width="120" height="54" x="402" y="574" anchorOffsetY="0" anchorOffsetX="0">
+			<e:BitmapLabel id="bestScoreBitmapLabel" font="birdFont_fnt" text="0" scaleX="1.2" scaleY="1.2" horizontalCenter="0" verticalCenter="0"/>
+		</e:Group>
+		<e:Button id="restartButton" label="Button" y="876" anchorOffsetX="0" width="240" anchorOffsetY="0" height="118" horizontalCenter="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image  source="ui_001" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" width.down="95%" height.down="95%"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button label="Button" y="721.45" anchorOffsetX="0" width="250" anchorOffsetY="0" height="90" x="84">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image source="ui_002" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" width.down="95%" height.down="95%"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button label="Button" y="721.45" anchorOffsetX="0" anchorOffsetY="0" height="90" x="357.33" width="220">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image source="ui_003" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" width.down="95%" height.down="95%"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+
 </e:Skin>

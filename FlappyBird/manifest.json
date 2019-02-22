@@ -10,16 +10,18 @@
 		"egretad/bin/egretad.js"
 	],
 	"game": [
-		"bin-debug/Obstacle.js",
+		"bin-debug/Platform.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/Center.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Map.js",
+		"bin-debug/Obstacle.js",
 		"bin-debug/Bird.js",
-		"bin-debug/Platform.js",
+		"bin-debug/Storage.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/UI.js",
+		"bin-debug/Util.js",
 		"bin-debug/GX/ArrayExtensions.js",
 		"bin-debug/GX/MathExtensions.js"
 	]

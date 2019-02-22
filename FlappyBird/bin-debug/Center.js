@@ -35,7 +35,7 @@ var Data = (function () {
      * 鸟的起点
      */
     Data.getBirdStartX = function () {
-        return Data.SceneWidth < 200 ? 200 : Data.SceneWidth / 3;
+        return Data.SceneWidth < 200 ? Data.SceneWidth : 200;
     };
     /**
      * 鸟的起点
@@ -50,9 +50,14 @@ var Data = (function () {
         return Data.SceneHeight - Data.getSkyHeight();
     };
     /**
+     * 难度幅度 [0,getSkyHeight]
+     */
+    Data.DifficultyRange = 400;
+    Data.Scale = 1.4;
+    /**
      * 背景飞行速度
      */
-    Data.SkyMoveSpeed = 3;
+    Data.SkyMoveSpeed = 5;
     /**
      * 烟台移动速度
      */
@@ -60,7 +65,7 @@ var Data = (function () {
     /**
      * 烟台上下间隔
      */
-    Data.ObstacleUDGap = 200;
+    Data.ObstacleUDGap = 220;
     /**
      * 烟台左右间隔
      */

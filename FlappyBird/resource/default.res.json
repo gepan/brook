@@ -11,7 +11,7 @@
 		},
 		{
 			"name":"bird_res_json",
-			"subkeys":"arrow,arrow_01,background_day,background_night,best,button03,game_over,ground,ready_00,ready_01,ready_02,ready_03,start,tap,tube01,tube02,tube03,vs,you,you_lose,you_win",
+			"subkeys":"arrow,arrow_01,background_day,background_night,best,button03,game_over,ground,ready_00,ready_01,ready_02,ready_03,start,tap,tube01,tube02,tube03,ui_001,ui_002,ui_003,ui_004,vs,you,you_lose,you_win",
 			"type":"sheet",
 			"url":"assets/res/bird_res.json"
 		},

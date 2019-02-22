@@ -13,17 +13,37 @@ var UI = (function (_super) {
     function UI() {
         var _this = _super.call(this) || this;
         _this.skinName = new UISkin();
-        _this.touchChildren = false;
-        _this.touchEnabled = false;
+        _this.tipGroup.touchChildren = false;
+        _this.tipGroup.touchEnabled = false;
         _this.width = Data.SceneWidth;
         _this.height = Data.SceneHeight;
+        _this.gameoverGroup.visible = false;
+        _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.onClickTap, _this);
         return _this;
     }
     UI.prototype.setScoreLabel = function (v) {
-        this.scoreLabel.text = v + "米";
+        if (v > Number(this.scoreBitmapLabel.text)) {
+            egret.Tween.removeTweens(this.scoreBitmapLabel);
+            egret.Tween.get(this.scoreBitmapLabel).to({ scaleX: 2, scaleY: 2 }, 200).to({ scaleX: 1.5, scaleY: 1.5 }, 100);
+        }
+        this.scoreBitmapLabel.text = v + "";
     };
     UI.prototype.setTipVisible = function (b) {
-        this.tipLabel.visible = b;
+        this.tipGroup.visible = b;
+    };
+    UI.prototype.gameOver = function (score, betscore) {
+        this.gameoverGroup.visible = true;
+        Util.scrollNumber(this.thisScoreBitmapLabel, 0, score, 0.5, true, 1.2, function () { });
+        this.bestScoreBitmapLabel.text = betscore + "";
+    };
+    UI.prototype.onClickTap = function (e) {
+        if (e.target == this.restartButton) {
+            this.gameoverGroup.visible = false;
+            Center.gameState = GameState.Ready;
+            this.setTipVisible(true);
+            this.setScoreLabel(0);
+            Map.instance.readyUI();
+        }
     };
     return UI;
 }(eui.Component));

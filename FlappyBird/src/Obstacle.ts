@@ -1,23 +1,30 @@
 class Obstacle extends egret.DisplayObjectContainer {
     private upImage: eui.Image;
     private downImage: eui.Image;
-    public index: number
-    constructor(index: number) {
+    public index: number;
+    public centerY:number;
+    constructor(index: number,lastCenterY:number) {
         super();
         this.index = index;
         this.upImage = new eui.Image("tube03");
-        this.upImage.scale9Grid = new egret.Rectangle(6,40,40,240);
         this.upImage.width = 80;
-        let skyHeight = Data.getSkyHeight();
-        this.upImage.height = Math.random() * (skyHeight - Data.ObstacleUDGap);
-        this.upImage.y = 0;
+        this.upImage.scale9Grid = new egret.Rectangle(6,40,40,240);
         this.downImage = new eui.Image("tube02");
         this.downImage.width = 80;
         this.downImage.scale9Grid = new egret.Rectangle(6,40,40,240);
-        this.downImage.height = skyHeight - Data.ObstacleUDGap - this.upImage.height;
-        this.downImage.y = this.upImage.y + this.upImage.height + Data.ObstacleUDGap;
         this.addChild(this.upImage);
         this.addChild(this.downImage);
+        let skyHeight = Data.getSkyHeight();
+        let minCenter = lastCenterY - Data.DifficultyRange;
+        minCenter = minCenter < 0 + Data.ObstacleUDGap / 2 ? 0 + Data.ObstacleUDGap / 2 : minCenter;
+        let maxCenter = lastCenterY + Data.DifficultyRange;
+        maxCenter = maxCenter > skyHeight - Data.ObstacleUDGap / 2 ? skyHeight - Data.ObstacleUDGap / 2 : maxCenter
+        let centerY = Math.randomInteger(minCenter, maxCenter);
+        this.centerY = centerY;
+        this.upImage.height = centerY - Data.ObstacleUDGap / 2;
+        this.upImage.y = 0;
+        this.downImage.y = centerY + Data.ObstacleUDGap / 2;
+        this.downImage.height = skyHeight - this.downImage.y;
         this.x = Data.SceneWidth + Data.ObstacleLRGap * (index - 1);
         this.width = this.upImage.width;
     }
