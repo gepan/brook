@@ -6,9 +6,9 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
  */
 var BridState;
 (function (BridState) {
-    BridState[BridState["Up"] = 0] = "Up";
-    BridState[BridState["Normal"] = 1] = "Normal";
-    BridState[BridState["Down"] = 2] = "Down";
+    BridState[BridState["Up"] = 3] = "Up";
+    BridState[BridState["Normal"] = 2] = "Normal";
+    BridState[BridState["Down"] = 1] = "Down";
 })(BridState || (BridState = {}));
 /**
  * 游戏的状态
@@ -43,6 +43,12 @@ var Data = (function () {
     Data.getBirdStartY = function () {
         return Data.SceneHeight / 2;
     };
+    Data.getSkyHeight = function () {
+        return Data.SceneHeight > 800 ? 800 : Data.SceneHeight;
+    };
+    Data.getGroundHeight = function () {
+        return Data.SceneHeight - Data.getSkyHeight();
+    };
     /**
      * 背景飞行速度
      */
@@ -54,7 +60,7 @@ var Data = (function () {
     /**
      * 烟台上下间隔
      */
-    Data.ObstacleUDGap = 300;
+    Data.ObstacleUDGap = 200;
     /**
      * 烟台左右间隔
      */

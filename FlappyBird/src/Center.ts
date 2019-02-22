@@ -2,9 +2,9 @@
  * 鸟的状态
  */
 enum BridState {
-    Up = 0,
-    Normal = 1,
-    Down = 2,
+    Up = 3,
+    Normal = 2,
+    Down = 1,
 }
 
 /**
@@ -39,7 +39,7 @@ class Data {
     /**
      * 烟台上下间隔
      */
-    public static ObstacleUDGap: number = 300;
+    public static ObstacleUDGap: number = 200;
     /**
      * 烟台左右间隔
      */
@@ -55,6 +55,14 @@ class Data {
      */
     public static getBirdStartY(): number {
         return Data.SceneHeight / 2;
+    }
+
+    public static getSkyHeight(): number {
+        return Data.SceneHeight > 800 ? 800 : Data.SceneHeight;
+    }
+
+    public static getGroundHeight(): number {
+        return Data.SceneHeight - Data.getSkyHeight();
     }
     /**
      * 鸟掉落速度

@@ -5,12 +5,17 @@ class Obstacle extends egret.DisplayObjectContainer {
     constructor(index: number) {
         super();
         this.index = index;
-        this.upImage = new eui.Image("pipe2_png");
-        this.upImage.height = Math.random() * (Data.SceneHeight - Data.ObstacleUDGap);
+        this.upImage = new eui.Image("tube03");
+        this.upImage.scale9Grid = new egret.Rectangle(6,40,40,240);
+        this.upImage.width = 80;
+        let skyHeight = Data.getSkyHeight();
+        this.upImage.height = Math.random() * (skyHeight - Data.ObstacleUDGap);
         this.upImage.y = 0;
-        this.downImage = new eui.Image("pipe1_png");
-        this.downImage.height = Data.SceneHeight - Data.ObstacleUDGap - this.upImage.height;
-        this.downImage.y = Data.SceneHeight - this.downImage.height;
+        this.downImage = new eui.Image("tube02");
+        this.downImage.width = 80;
+        this.downImage.scale9Grid = new egret.Rectangle(6,40,40,240);
+        this.downImage.height = skyHeight - Data.ObstacleUDGap - this.upImage.height;
+        this.downImage.y = this.upImage.y + this.upImage.height + Data.ObstacleUDGap;
         this.addChild(this.upImage);
         this.addChild(this.downImage);
         this.x = Data.SceneWidth + Data.ObstacleLRGap * (index - 1);
@@ -25,7 +30,7 @@ class Obstacle extends egret.DisplayObjectContainer {
     // private rect1:eui.Rect = new eui.Rect();
     // private rect2:eui.Rect = new eui.Rect();
     // private rect3:eui.Rect = new eui.Rect();
-    isCollision(bird: Bird):boolean {
+    isCollision(bird: Bird): boolean {
         let birdRect = bird.getRect();
         let upRect = this.getUpRect();
         let downRect = this.getDownRect();

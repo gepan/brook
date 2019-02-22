@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<e:Skin class="MapSkin" states="up,down,disabled" minHeight="50" minWidth="100" xmlns:e="http://ns.egret.com/eui" width="640" height="1136">
-    <e:Image alpha.disabled="0.5"
-            
-             source.down="button_down_png" source="sky_png" fillMode="scale" anchorOffsetX="0" top="0" bottom="0"/>
-	<e:Image source="land_png" fillMode="scale" anchorOffsetX="0" bottom="0" anchorOffsetY="0" scaleY="2" width="640" x="0"/>
+<e:Skin class="MapSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="640" height="1136">
+    <e:Image id="skyImage"  source="background_day" anchorOffsetY="0" scale9Grid="50,80,300,311" width="640" height="881" y="0" x="0"/>
+	<e:Image id="ground1Image" width="640" source="ground" bottom="0"  scale9Grid="1,52,399,65"/>
+	<e:Image id="ground2Image" width="640" source="ground" bottom="0" scale9Grid="1,52,399,65"/>
 </e:Skin>

@@ -13,12 +13,17 @@ var Obstacle = (function (_super) {
     function Obstacle(index) {
         var _this = _super.call(this) || this;
         _this.index = index;
-        _this.upImage = new eui.Image("pipe2_png");
-        _this.upImage.height = Math.random() * (Data.SceneHeight - Data.ObstacleUDGap);
+        _this.upImage = new eui.Image("tube03");
+        _this.upImage.scale9Grid = new egret.Rectangle(6, 40, 40, 240);
+        _this.upImage.width = 80;
+        var skyHeight = Data.getSkyHeight();
+        _this.upImage.height = Math.random() * (skyHeight - Data.ObstacleUDGap);
         _this.upImage.y = 0;
-        _this.downImage = new eui.Image("pipe1_png");
-        _this.downImage.height = Data.SceneHeight - Data.ObstacleUDGap - _this.upImage.height;
-        _this.downImage.y = Data.SceneHeight - _this.downImage.height;
+        _this.downImage = new eui.Image("tube02");
+        _this.downImage.width = 80;
+        _this.downImage.scale9Grid = new egret.Rectangle(6, 40, 40, 240);
+        _this.downImage.height = skyHeight - Data.ObstacleUDGap - _this.upImage.height;
+        _this.downImage.y = _this.upImage.y + _this.upImage.height + Data.ObstacleUDGap;
         _this.addChild(_this.upImage);
         _this.addChild(_this.downImage);
         _this.x = Data.SceneWidth + Data.ObstacleLRGap * (index - 1);

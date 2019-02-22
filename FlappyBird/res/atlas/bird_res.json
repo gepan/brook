@@ -1,0 +1,215 @@
+{
+  "file": "bird_res.png",
+  "frames": {
+    "arrow": {
+      "x": 961,
+      "y": 0,
+      "w": 56,
+      "h": 65,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 56,
+      "sourceH": 65
+    },
+    "arrow_01": {
+      "x": 908,
+      "y": 91,
+      "w": 56,
+      "h": 65,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 56,
+      "sourceH": 65
+    },
+    "background_day": {
+      "x": 0,
+      "y": 0,
+      "w": 400,
+      "h": 640,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 400,
+      "sourceH": 640
+    },
+    "background_night": {
+      "x": 401,
+      "y": 0,
+      "w": 400,
+      "h": 640,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 400,
+      "sourceH": 640
+    },
+    "best": {
+      "x": 96,
+      "y": 929,
+      "w": 76,
+      "h": 32,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 76,
+      "sourceH": 32
+    },
+    "button03": {
+      "x": 990,
+      "y": 66,
+      "w": 26,
+      "h": 28,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 26,
+      "sourceH": 28
+    },
+    "game_over": {
+      "x": 0,
+      "y": 874,
+      "w": 204,
+      "h": 54,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 204,
+      "sourceH": 54
+    },
+    "ground": {
+      "x": 0,
+      "y": 641,
+      "w": 400,
+      "h": 133,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 400,
+      "sourceH": 133
+    },
+    "ready_00": {
+      "x": 179,
+      "y": 842,
+      "w": 58,
+      "h": 25,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 58,
+      "sourceH": 25
+    },
+    "ready_01": {
+      "x": 287,
+      "y": 775,
+      "w": 16,
+      "h": 36,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 16,
+      "sourceH": 36
+    },
+    "ready_02": {
+      "x": 75,
+      "y": 970,
+      "w": 24,
+      "h": 36,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 24,
+      "sourceH": 36
+    },
+    "ready_03": {
+      "x": 965,
+      "y": 66,
+      "w": 24,
+      "h": 36,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 24,
+      "sourceH": 36
+    },
+    "start": {
+      "x": 122,
+      "y": 775,
+      "w": 164,
+      "h": 66,
+      "offX": 18,
+      "offY": 0,
+      "sourceW": 200,
+      "sourceH": 70
+    },
+    "tap": {
+      "x": 0,
+      "y": 775,
+      "w": 121,
+      "h": 98,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 121,
+      "sourceH": 98
+    },
+    "tube01": {
+      "x": 908,
+      "y": 0,
+      "w": 52,
+      "h": 90,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 52,
+      "sourceH": 90
+    },
+    "tube02": {
+      "x": 802,
+      "y": 0,
+      "w": 52,
+      "h": 320,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 52,
+      "sourceH": 320
+    },
+    "tube03": {
+      "x": 855,
+      "y": 0,
+      "w": 52,
+      "h": 320,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 52,
+      "sourceH": 320
+    },
+    "vs": {
+      "x": 401,
+      "y": 641,
+      "w": 44,
+      "h": 28,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 44,
+      "sourceH": 28
+    },
+    "you": {
+      "x": 122,
+      "y": 842,
+      "w": 56,
+      "h": 28,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 56,
+      "sourceH": 28
+    },
+    "you_lose": {
+      "x": 0,
+      "y": 929,
+      "w": 95,
+      "h": 40,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 95,
+      "sourceH": 40
+    },
+    "you_win": {
+      "x": 0,
+      "y": 970,
+      "w": 74,
+      "h": 42,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 74,
+      "sourceH": 42
+    }
+  }
+}
