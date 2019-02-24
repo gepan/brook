@@ -45,6 +45,7 @@ var UI = (function (_super) {
             Map.instance.readyUI();
         }
         else if (e.target == this.rankButton) {
+            this.friendRank();
         }
     };
     Object.defineProperty(UI.prototype, "rankMask", {

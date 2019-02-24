@@ -1,0 +1,52 @@
+{
+  "mc": {
+    "action": {
+      "frameRate": 10,
+      "labels": [
+        {
+          "name": "mc",
+          "frame": 1,
+          "end": 3
+        }
+      ],
+      "events": [],
+      "frames": [
+        {
+          "res": "bird_red_lv1001",
+          "x": -20,
+          "y": -14
+        },
+        {
+          "res": "bird_red_lv1002",
+          "x": -20,
+          "y": -14
+        },
+        {
+          "res": "bird_red_lv1003",
+          "x": -20,
+          "y": -14
+        }
+      ]
+    }
+  },
+  "res": {
+    "bird_red_lv1001": {
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 28
+    },
+    "bird_red_lv1002": {
+      "x": 0,
+      "y": 29,
+      "w": 40,
+      "h": 28
+    },
+    "bird_red_lv1003": {
+      "x": 41,
+      "y": 0,
+      "w": 40,
+      "h": 28
+    }
+  }
+}

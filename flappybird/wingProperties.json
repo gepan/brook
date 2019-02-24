@@ -4,6 +4,10 @@
             {
                 "configPath": "resource/default.res.json",
                 "relativePath": "resource/"
+            },
+            {
+                "configPath": "resource/assets/res/bird_res.json",
+                "relativePath": "resource/"
             }
         ]
     },

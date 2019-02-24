@@ -122,7 +122,7 @@ var Main = (function (_super) {
                         return [4 /*yield*/, platform.getUserInfo()];
                     case 3:
                         userInfo = _a.sent();
-                        console.log(userInfo);
+                        console.error("userInfo:" + userInfo);
                         return [2 /*return*/];
                 }
             });

@@ -31,6 +31,14 @@ class Main extends eui.UILayer {
     protected createChildren(): void {
         super.createChildren();
 
+        platform.getUserInfo().then(function(value):void{
+        })
+
+        var playfirst:string= localStorage.getItem("playfirst");
+        if(!playfirst)
+        {
+        }
+
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
         })
@@ -42,7 +50,7 @@ class Main extends eui.UILayer {
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
         }
-        egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        //egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
         //inject the custom material parser
         //注入自定义的素材解析器
         let assetAdapter = new AssetAdapter();
@@ -65,14 +73,19 @@ class Main extends eui.UILayer {
     }
     private async runGame() {
         this.initGame();
-        await this.loadResource()
-        this.createGameScene();
+        await this.loadResource();
         await platform.login();
+        await this.creatGame();
         const userInfo = await platform.getUserInfo();
         console.error("userInfo:"+userInfo);
-
     }
 
+    private async creatGame()
+    {
+        let map = new Map;
+        this.addChild(map);
+        platform.sendShareData({command:"load"});
+    }
     private async loadResource() {
         try {
             const loadingView = new LoadingUI();
@@ -97,25 +110,5 @@ class Main extends eui.UILayer {
             }, this);
 
         })
-    }
-
-    private textfield: egret.TextField;
-    /**
-     * 创建场景界面
-     * Create scene interface
-     */
-    protected createGameScene(): void {
-        let map = new Map;
-        this.addChild(map);
-    }
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
     }
 }
