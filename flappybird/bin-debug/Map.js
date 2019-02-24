@@ -176,6 +176,7 @@ var Map = (function (_super) {
         if (this.score > betscore) {
             betscore = this.score;
             storage.bestScore.setValue(betscore);
+            platform.setUserCloudStorage([{ key: "score", value: betscore + "" }]);
         }
         this.ui.gameOver(this.score, betscore);
     };

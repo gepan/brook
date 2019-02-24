@@ -5,6 +5,7 @@ class UI extends eui.Component {
 
     private gameoverGroup: eui.Group;
     private restartButton: eui.Button;
+    private rankButton: eui.Button;
 
     private thisScoreBitmapLabel: eui.BitmapLabel;
     private bestScoreBitmapLabel: eui.BitmapLabel;
@@ -43,5 +44,39 @@ class UI extends eui.Component {
             this.setScoreLabel(0);
             Map.instance.readyUI();
         }
+        else if (e.target == this.rankButton) {
+            this.friendRank();
+        }
+    }
+
+
+    private _rankMask: egret.Shape;
+    public get rankMask(): egret.Shape {
+        if (this._rankMask == null) {
+            this._rankMask = new egret.Shape();
+            this._rankMask.graphics.beginFill(0x000000, 0.7);
+            this._rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
+            this._rankMask.graphics.endFill();
+            this.addChild(this._rankMask);
+            this._rankMask.touchEnabled = true;
+            this._rankMask.visible = false;
+        }
+        return this._rankMask;
+    }
+    private _rankBit: egret.Bitmap;
+    private friendRank(): void {
+        this.rankMask.visible = true;
+        platform.sendShareData({ command: "open", type: "friend" });
+        this._rankBit = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
+        this._rankBit.touchEnabled = true;
+        this._rankBit.pixelHitTest = true;
+        this.addChild(this._rankBit);
+        this.rankMask.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+    }
+    private onMask(e: egret.TouchEvent): void {
+        platform.sendShareData({ command: "close" });
+        this._rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+        this.removeChild(this._rankBit);
+        this._rankMask.visible = false;
     }
 }

@@ -170,6 +170,7 @@ class Map extends eui.Component {
         if (this.score > betscore) {
             betscore = this.score;
             storage.bestScore.setValue(betscore)
+            platform.setUserCloudStorage([{ key: "score", value: betscore + "" }]);
         }
         this.ui.gameOver(this.score, betscore);
     }

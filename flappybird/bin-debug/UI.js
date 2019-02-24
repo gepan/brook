@@ -44,6 +44,39 @@ var UI = (function (_super) {
             this.setScoreLabel(0);
             Map.instance.readyUI();
         }
+        else if (e.target == this.rankButton) {
+        }
+    };
+    Object.defineProperty(UI.prototype, "rankMask", {
+        get: function () {
+            if (this._rankMask == null) {
+                this._rankMask = new egret.Shape();
+                this._rankMask.graphics.beginFill(0x000000, 0.7);
+                this._rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
+                this._rankMask.graphics.endFill();
+                this.addChild(this._rankMask);
+                this._rankMask.touchEnabled = true;
+                this._rankMask.visible = false;
+            }
+            return this._rankMask;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    UI.prototype.friendRank = function () {
+        this.rankMask.visible = true;
+        platform.sendShareData({ command: "open", type: "friend" });
+        this._rankBit = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
+        this._rankBit.touchEnabled = true;
+        this._rankBit.pixelHitTest = true;
+        this.addChild(this._rankBit);
+        this.rankMask.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+    };
+    UI.prototype.onMask = function (e) {
+        platform.sendShareData({ command: "close" });
+        this._rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+        this.removeChild(this._rankBit);
+        this._rankMask.visible = false;
     };
     return UI;
 }(eui.Component));

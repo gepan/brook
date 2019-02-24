@@ -21,10 +21,18 @@
 		<e:Group width="120" height="54" x="402" y="574" anchorOffsetY="0" anchorOffsetX="0">
 			<e:BitmapLabel id="bestScoreBitmapLabel" font="birdFont_fnt" text="0" scaleX="1.2" scaleY="1.2" horizontalCenter="0" verticalCenter="0"/>
 		</e:Group>
-		<e:Button id="restartButton" label="Button" y="876" anchorOffsetX="0" width="240" anchorOffsetY="0" height="118" horizontalCenter="0">
+		<e:Button id="restartButton" label="Button" y="876" anchorOffsetX="0" width="240" anchorOffsetY="0" height="118" horizontalCenter="-106">
 			<e:skinName>
 			<e:Skin states="up,down,disabled">
 				<e:Image  source="ui_001" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" width.down="95%" height.down="95%"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="rankButton" label="Button" y="900" anchorOffsetX="0" width="148" anchorOffsetY="0" height="70" horizontalCenter="156">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Rect width="100%" height="100%"/>
+				<e:Label id="aa" text="排行榜" horizontalCenter="0" verticalCenter="0"/>
 			</e:Skin>
 			</e:skinName>
 		</e:Button>

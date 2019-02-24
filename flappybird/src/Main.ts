@@ -69,7 +69,7 @@ class Main extends eui.UILayer {
         this.createGameScene();
         await platform.login();
         const userInfo = await platform.getUserInfo();
-        console.log(userInfo);
+        console.error("userInfo:"+userInfo);
 
     }
 
