@@ -1,5 +1,9 @@
 var Util;
 (function (Util) {
+    function isWxgame() {
+        return platform.name == "wxgame";
+    }
+    Util.isWxgame = isWxgame;
     function lerp(fromNum, toNum, prop) {
         return fromNum + (toNum - fromNum) * prop;
     }

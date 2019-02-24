@@ -5,6 +5,8 @@
  * 由于不同平台的接口形式各有不同，白鹭推荐开发者将所有接口封装为基于 Promise 的异步形式
  */
 declare interface Platform {
+    // name:any;
+
     //开放数据域
     openDataContext:any;
     

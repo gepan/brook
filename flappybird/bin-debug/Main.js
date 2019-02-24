@@ -78,6 +78,11 @@ var Main = (function (_super) {
     }
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
+        platform.getUserInfo().then(function (value) {
+        });
+        var playfirst = localStorage.getItem("playfirst");
+        if (!playfirst) {
+        }
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
         });
@@ -87,7 +92,10 @@ var Main = (function (_super) {
         egret.lifecycle.onResume = function () {
             egret.ticker.resume();
         };
-        egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        console.log("platform.name:" + platform.name);
+        if (!Util.isWxgame()) {
+            egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        }
         //inject the custom material parser
         //注入自定义的素材解析器
         var assetAdapter = new AssetAdapter();
@@ -115,16 +123,29 @@ var Main = (function (_super) {
                         return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
-                        this.createGameScene();
                         return [4 /*yield*/, platform.login()];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, platform.getUserInfo()];
+                        return [4 /*yield*/, this.creatGame()];
                     case 3:
+                        _a.sent();
+                        return [4 /*yield*/, platform.getUserInfo()];
+                    case 4:
                         userInfo = _a.sent();
                         console.error("userInfo:" + userInfo);
                         return [2 /*return*/];
                 }
+            });
+        });
+    };
+    Main.prototype.creatGame = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var map;
+            return __generator(this, function (_a) {
+                map = new Map;
+                this.addChild(map);
+                platform.sendShareData({ command: "load" });
+                return [2 /*return*/];
             });
         });
     };
@@ -167,24 +188,6 @@ var Main = (function (_super) {
                 resolve();
             }, _this);
         });
-    };
-    /**
-     * 创建场景界面
-     * Create scene interface
-     */
-    Main.prototype.createGameScene = function () {
-        var map = new Map;
-        this.addChild(map);
-    };
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    Main.prototype.createBitmapByName = function (name) {
-        var result = new egret.Bitmap();
-        var texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
     };
     return Main;
 }(eui.UILayer));

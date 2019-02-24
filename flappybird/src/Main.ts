@@ -50,7 +50,10 @@ class Main extends eui.UILayer {
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
         }
-        //egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        console.log("platform.name:"+platform["name"])
+        if(!Util.isWxgame()){
+            egret.MainContext.instance.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+        }
         //inject the custom material parser
         //注入自定义的素材解析器
         let assetAdapter = new AssetAdapter();

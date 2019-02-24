@@ -21,6 +21,10 @@ var UI = (function (_super) {
         _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.onClickTap, _this);
         return _this;
     }
+    UI.prototype.onResize = function () {
+        this.width = Data.SceneWidth;
+        this.height = Data.SceneHeight;
+    };
     UI.prototype.setScoreLabel = function (v) {
         if (v > Number(this.scoreBitmapLabel.text)) {
             egret.Tween.removeTweens(this.scoreBitmapLabel);

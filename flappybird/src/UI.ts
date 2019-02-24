@@ -19,6 +19,10 @@ class UI extends eui.Component {
         this.gameoverGroup.visible = false;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickTap, this);
     }
+    onResize(){
+        this.width = Data.SceneWidth;
+        this.height = Data.SceneHeight;
+    }
     public setScoreLabel(v: number) {
         if (v > Number(this.scoreBitmapLabel.text)) {
             egret.Tween.removeTweens(this.scoreBitmapLabel);

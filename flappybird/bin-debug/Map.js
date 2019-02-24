@@ -35,6 +35,14 @@ var Map = (function (_super) {
         this.addChild(this.ui);
         egret.MainContext.instance.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
+        this.addEventListener(egret.Event.RESIZE, this.onResize, this);
+    };
+    Map.prototype.onResize = function () {
+        this.width = Data.SceneWidth;
+        this.height = Data.SceneHeight;
+        this.ui.onResize();
+        this.skyImage.height = Data.getSkyHeight();
+        this.ground2Image.height = this.ground1Image.height = Data.getGroundHeight();
     };
     Map.prototype.initBirdPosition = function () {
         this.bird.x = Data.getBirdStartX();

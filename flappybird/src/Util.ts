@@ -1,4 +1,8 @@
 ﻿module Util {
+
+    export function isWxgame(){
+        return platform["name"] == "wxgame";
+    }
     export function lerp(fromNum: number, toNum: number, prop: number): number {
         return fromNum + (toNum - fromNum) * prop;
     }
