@@ -107,6 +107,8 @@ var egret = window.egret;
 				,
 				new eui.State ("down",
 					[
+						new eui.SetProperty("_Rect1","percentWidth",95),
+						new eui.SetProperty("_Rect1","percentHeight",95)
 					])
 				,
 				new eui.State ("disabled",
@@ -118,7 +120,10 @@ var egret = window.egret;
 
 		_proto._Rect1_i = function () {
 			var t = new eui.Rect();
+			this._Rect1 = t;
 			t.percentHeight = 100;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
 			t.percentWidth = 100;
 			return t;
 		};
@@ -137,9 +142,9 @@ var egret = window.egret;
 		__extends(UISkin$Skin3, _super);
 		function UISkin$Skin3() {
 			_super.call(this);
-			this.skinParts = [];
+			this.skinParts = ["aa"];
 			
-			this.elementsContent = [this._Image1_i()];
+			this.elementsContent = [this._Rect1_i(),this.aa_i()];
 			this.states = [
 				new eui.State ("up",
 					[
@@ -147,8 +152,8 @@ var egret = window.egret;
 				,
 				new eui.State ("down",
 					[
-						new eui.SetProperty("_Image1","percentWidth",95),
-						new eui.SetProperty("_Image1","percentHeight",95)
+						new eui.SetProperty("_Rect1","percentWidth",95),
+						new eui.SetProperty("_Rect1","percentHeight",95)
 					])
 				,
 				new eui.State ("disabled",
@@ -158,14 +163,21 @@ var egret = window.egret;
 		}
 		var _proto = UISkin$Skin3.prototype;
 
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			this._Image1 = t;
+		_proto._Rect1_i = function () {
+			var t = new eui.Rect();
+			this._Rect1 = t;
 			t.percentHeight = 100;
 			t.horizontalCenter = 0;
-			t.source = "ui_002";
 			t.verticalCenter = 0;
 			t.percentWidth = 100;
+			return t;
+		};
+		_proto.aa_i = function () {
+			var t = new eui.Label();
+			this.aa = t;
+			t.horizontalCenter = 0;
+			t.text = "群排行榜";
+			t.verticalCenter = 0;
 			return t;
 		};
 		return UISkin$Skin3;
@@ -201,7 +213,7 @@ var egret = window.egret;
 			this._Image1 = t;
 			t.percentHeight = 100;
 			t.horizontalCenter = 0;
-			t.source = "ui_003";
+			t.source = "ui_002";
 			t.verticalCenter = 0;
 			t.percentWidth = 100;
 			return t;
@@ -209,9 +221,47 @@ var egret = window.egret;
 		return UISkin$Skin4;
 	})(eui.Skin);
 
+	var UISkin$Skin5 = 	(function (_super) {
+		__extends(UISkin$Skin5, _super);
+		function UISkin$Skin5() {
+			_super.call(this);
+			this.skinParts = [];
+			
+			this.elementsContent = [this._Image1_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+						new eui.SetProperty("_Image1","percentWidth",95),
+						new eui.SetProperty("_Image1","percentHeight",95)
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = UISkin$Skin5.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			this._Image1 = t;
+			t.percentHeight = 100;
+			t.horizontalCenter = 0;
+			t.source = "ui_003";
+			t.verticalCenter = 0;
+			t.percentWidth = 100;
+			return t;
+		};
+		return UISkin$Skin5;
+	})(eui.Skin);
+
 	function UISkin() {
 		_super.call(this);
-		this.skinParts = ["tipGroup","scoreBitmapLabel","thisScoreBitmapLabel","bestScoreBitmapLabel","restartButton","rankButton","gameoverGroup"];
+		this.skinParts = ["tipGroup","scoreBitmapLabel","thisScoreBitmapLabel","bestScoreBitmapLabel","restartButton","rankButton","groupButton","shareButton","gameoverGroup"];
 		
 		this.height = 1136;
 		this.minHeight = 50;
@@ -306,7 +356,7 @@ var egret = window.egret;
 		t.horizontalCenter = 0;
 		t.verticalCenter = 0;
 		t.width = 640;
-		t.elementsContent = [this._Image4_i(),this._Image5_i(),this._Group2_i(),this._Group3_i(),this.restartButton_i(),this.rankButton_i(),this._Button1_i(),this._Button2_i()];
+		t.elementsContent = [this._Image4_i(),this._Image5_i(),this._Group2_i(),this._Group3_i(),this.restartButton_i(),this.rankButton_i(),this.groupButton_i(),this._Button1_i(),this.shareButton_i()];
 		return t;
 	};
 	_proto._Image4_i = function () {
@@ -397,6 +447,19 @@ var egret = window.egret;
 		t.skinName = UISkin$Skin2;
 		return t;
 	};
+	_proto.groupButton_i = function () {
+		var t = new eui.Button();
+		this.groupButton = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 70;
+		t.horizontalCenter = 156;
+		t.label = "Button";
+		t.width = 148;
+		t.y = 994;
+		t.skinName = UISkin$Skin3;
+		return t;
+	};
 	_proto._Button1_i = function () {
 		var t = new eui.Button();
 		t.anchorOffsetX = 0;
@@ -406,11 +469,12 @@ var egret = window.egret;
 		t.width = 250;
 		t.x = 84;
 		t.y = 721.45;
-		t.skinName = UISkin$Skin3;
+		t.skinName = UISkin$Skin4;
 		return t;
 	};
-	_proto._Button2_i = function () {
+	_proto.shareButton_i = function () {
 		var t = new eui.Button();
+		this.shareButton = t;
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.height = 90;
@@ -418,7 +482,7 @@ var egret = window.egret;
 		t.width = 220;
 		t.x = 357.33;
 		t.y = 721.45;
-		t.skinName = UISkin$Skin4;
+		t.skinName = UISkin$Skin5;
 		return t;
 	};
 	return UISkin;

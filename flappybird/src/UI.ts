@@ -6,6 +6,8 @@ class UI extends eui.Component {
     private gameoverGroup: eui.Group;
     private restartButton: eui.Button;
     private rankButton: eui.Button;
+    private groupButton: eui.Button;
+    private shareButton: eui.Button;
 
     private thisScoreBitmapLabel: eui.BitmapLabel;
     private bestScoreBitmapLabel: eui.BitmapLabel;
@@ -19,7 +21,7 @@ class UI extends eui.Component {
         this.gameoverGroup.visible = false;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickTap, this);
     }
-    onResize(){
+    onResize() {
         this.width = Data.SceneWidth;
         this.height = Data.SceneHeight;
     }
@@ -51,21 +53,29 @@ class UI extends eui.Component {
         else if (e.target == this.rankButton) {
             this.friendRank();
         }
+        else if (e.target == this.groupButton) {
+            console.log("this.groupButton")
+            this.clickGroup();
+        }
+        else if(e.target == this.shareButton){
+            console.log("this.shareButton")
+            this.share();
+        }
     }
 
 
-    private _rankMask: egret.Shape;
+    private m_rankMask: egret.Shape;
     public get rankMask(): egret.Shape {
-        if (this._rankMask == null) {
-            this._rankMask = new egret.Shape();
-            this._rankMask.graphics.beginFill(0x000000, 0.7);
-            this._rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
-            this._rankMask.graphics.endFill();
-            this.addChild(this._rankMask);
-            this._rankMask.touchEnabled = true;
-            this._rankMask.visible = false;
+        if (this.m_rankMask == null) {
+            this.m_rankMask = new egret.Shape();
+            this.m_rankMask.graphics.beginFill(0x000000, 0.7);
+            this.m_rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
+            this.m_rankMask.graphics.endFill();
+            this.addChild(this.m_rankMask);
+            this.m_rankMask.touchEnabled = true;
+            this.m_rankMask.visible = false;
         }
-        return this._rankMask;
+        return this.m_rankMask;
     }
     private _rankBit: egret.Bitmap;
     private friendRank(): void {
@@ -79,8 +89,49 @@ class UI extends eui.Component {
     }
     private onMask(e: egret.TouchEvent): void {
         platform.sendShareData({ command: "close" });
-        this._rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+        this.rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
         this.removeChild(this._rankBit);
-        this._rankMask.visible = false;
+        this.rankMask.visible = false;
     }
+
+
+
+    private clickGroup() {
+        var desc: string = "我的分数"+this.scoreBitmapLabel.text;
+        var imgurl: string = "resource/assets/icon" + (1 + Math.floor(Math.random() * 4)) + ".jpg";
+        return new Promise((resolve, reject) => {
+            platform.updateShareMenu(true).then(data => {
+                console.log("updateShareMenu: ", data);
+                if (data) {
+                    return platform.shareApp(desc, imgurl, desc).then(data => {
+                        if (data && data.shareTickets && data.shareTickets.length > 0) {
+                            this.groupRank(data.shareTickets[0]);
+                            resolve(true);
+                        } else {
+                            resolve(false);
+                        }
+                    });
+                } else {
+                    resolve(false);
+                }
+            })
+        });
+    }
+
+    private groupRank(shareTicket): void {
+        this.rankMask.visible = true;
+        platform.sendShareData({ command: "open", type: "group", groupid: shareTicket });
+        this._rankBit = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
+        this._rankBit.touchEnabled = true;
+        this._rankBit.pixelHitTest = true;
+        this.addChild(this._rankBit);
+        this.rankMask.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+    }
+
+    private share():void
+	{
+		var desc:string= "我的分数"+this.scoreBitmapLabel.text;
+		var imgurl:string="resource/assets/icon"+(1+Math.floor(Math.random()*4))+".jpg";
+		platform.shareAppMessage(desc,imgurl,desc);
+	}
 }

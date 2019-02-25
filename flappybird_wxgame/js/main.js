@@ -897,19 +897,27 @@ var UI = (function (_super) {
         else if (e.target == this.rankButton) {
             this.friendRank();
         }
+        else if (e.target == this.groupButton) {
+            console.log("this.groupButton");
+            this.clickGroup();
+        }
+        else if (e.target == this.shareButton) {
+            console.log("this.shareButton");
+            this.share();
+        }
     };
     Object.defineProperty(UI.prototype, "rankMask", {
         get: function () {
-            if (this._rankMask == null) {
-                this._rankMask = new egret.Shape();
-                this._rankMask.graphics.beginFill(0x000000, 0.7);
-                this._rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
-                this._rankMask.graphics.endFill();
-                this.addChild(this._rankMask);
-                this._rankMask.touchEnabled = true;
-                this._rankMask.visible = false;
+            if (this.m_rankMask == null) {
+                this.m_rankMask = new egret.Shape();
+                this.m_rankMask.graphics.beginFill(0x000000, 0.7);
+                this.m_rankMask.graphics.drawRect(0, 0, Data.SceneWidth, Data.SceneHeight);
+                this.m_rankMask.graphics.endFill();
+                this.addChild(this.m_rankMask);
+                this.m_rankMask.touchEnabled = true;
+                this.m_rankMask.visible = false;
             }
-            return this._rankMask;
+            return this.m_rankMask;
         },
         enumerable: true,
         configurable: true
@@ -925,9 +933,47 @@ var UI = (function (_super) {
     };
     UI.prototype.onMask = function (e) {
         platform.sendShareData({ command: "close" });
-        this._rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+        this.rankMask.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
         this.removeChild(this._rankBit);
-        this._rankMask.visible = false;
+        this.rankMask.visible = false;
+    };
+    UI.prototype.clickGroup = function () {
+        var _this = this;
+        var desc = "我的分数" + this.scoreBitmapLabel.text;
+        var imgurl = "resource/assets/icon" + (1 + Math.floor(Math.random() * 4)) + ".jpg";
+        return new Promise(function (resolve, reject) {
+            platform.updateShareMenu(true).then(function (data) {
+                console.log("updateShareMenu: ", data);
+                if (data) {
+                    return platform.shareApp(desc, imgurl, desc).then(function (data) {
+                        if (data && data.shareTickets && data.shareTickets.length > 0) {
+                            _this.groupRank(data.shareTickets[0]);
+                            resolve(true);
+                        }
+                        else {
+                            resolve(false);
+                        }
+                    });
+                }
+                else {
+                    resolve(false);
+                }
+            });
+        });
+    };
+    UI.prototype.groupRank = function (shareTicket) {
+        this.rankMask.visible = true;
+        platform.sendShareData({ command: "open", type: "group", groupid: shareTicket });
+        this._rankBit = platform.openDataContext.createDisplayObject(null, this.stage.stageWidth, this.stage.stageHeight);
+        this._rankBit.touchEnabled = true;
+        this._rankBit.pixelHitTest = true;
+        this.addChild(this._rankBit);
+        this.rankMask.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onMask, this);
+    };
+    UI.prototype.share = function () {
+        var desc = "我的分数" + this.scoreBitmapLabel.text;
+        var imgurl = "resource/assets/icon" + (1 + Math.floor(Math.random() * 4)) + ".jpg";
+        platform.shareAppMessage(desc, imgurl, desc);
     };
     return UI;
 }(eui.Component));

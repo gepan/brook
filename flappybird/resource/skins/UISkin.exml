@@ -31,8 +31,16 @@
 		<e:Button id="rankButton" label="Button" y="900" anchorOffsetX="0" width="148" anchorOffsetY="0" height="70" horizontalCenter="156">
 			<e:skinName>
 			<e:Skin states="up,down,disabled">
-				<e:Rect width="100%" height="100%"/>
+				<e:Rect width="100%" height="100%" width.down="95%" height.down="95%" horizontalCenter="0" verticalCenter="0"/>
 				<e:Label id="aa" text="排行榜" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="groupButton" label="Button" y="994" anchorOffsetX="0" width="148" anchorOffsetY="0" height="70" horizontalCenter="156">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Rect width="100%" height="100%" width.down="95%" height.down="95%" horizontalCenter="0" verticalCenter="0"/>
+				<e:Label id="aa" text="群排行榜" horizontalCenter="0" verticalCenter="0"/>
 			</e:Skin>
 			</e:skinName>
 		</e:Button>
@@ -43,7 +51,7 @@
 			</e:Skin>
 			</e:skinName>
 		</e:Button>
-		<e:Button label="Button" y="721.45" anchorOffsetX="0" anchorOffsetY="0" height="90" x="357.33" width="220">
+		<e:Button id="shareButton" label="Button" y="721.45" anchorOffsetX="0" anchorOffsetY="0" height="90" x="357.33" width="220">
 			<e:skinName>
 			<e:Skin states="up,down,disabled">
 				<e:Image source="ui_003" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" width.down="95%" height.down="95%"/>
